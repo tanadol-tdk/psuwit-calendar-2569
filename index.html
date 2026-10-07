@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="th" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ปฏิทินโรงเรียน มอ.วิทยานุสรณ์ ปีการศึกษา 2569</title>
+    <!-- Google Fonts & Tailwind CSS CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#EFF6FF',
+                            100: '#DBEAFE',
+                            200: '#BFDBFE',
+                            500: '#3B82F6',
+                            600: '#2563EB',
+                            700: '#1D4ED8',
+                            800: '#1E40AF',
+                            900: '#1E3A8A',
+                            950: '#172554'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Sarabun', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #F8FAFC;
+            color: #0F172A;
+        }
+
+        .light-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .day-cell {
+            min-height: 72px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #FFFFFF;
+            border: 1px solid #F1F5F9;
+        }
+
+        @media (max-width: 640px) {
+            .day-cell {
+                min-height: 54px;
+            }
+        }
+
+        .day-cell:hover {
+            background-color: #F8FAFC;
+            border-color: #CBD5E1;
+            transform: translateY(-2px);
+        }
+
+        .day-cell.selected {
+            background-color: #EFF6FF !important;
+            border-color: #2563EB !important;
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.15);
+        }
+
+        .event-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        /* Category Color Badges (Light Theme) */
+        .cat-holiday { background-color: #FFE4E6; color: #E11D48; border: 1px solid #FECDD3; }
+        .dot-holiday { background-color: #E11D48; }
+
+        .cat-exam { background-color: #FEF3C7; color: #D97706; border: 1px solid #FDE68A; }
+        .dot-exam { background-color: #D97706; }
+
+        .cat-school { background-color: #DBEAFE; color: #1D4ED8; border: 1px solid #BFDBFE; }
+        .dot-school { background-color: #1D4ED8; }
+
+        .cat-camp { background-color: #D1FAE5; color: #059669; border: 1px solid #A7F3D0; }
+        .dot-camp { background-color: #059669; }
+
+        .cat-parent { background-color: #F3E8FF; color: #7E22CE; border: 1px solid #E9D5FF; }
+        .dot-parent { background-color: #7E22CE; }
+
+        .cat-student { background-color: #E0F2FE; color: #0284C7; border: 1px solid #BAE6FD; }
+        .dot-student { background-color: #0284C7; }
+
+        .cat-term { background-color: #E0E7FF; color: #4338CA; border: 1px solid #C7D2FE; }
+        .dot-term { background-color: #4338CA; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #F1F5F9; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+
+    <!-- Top Header Navigation (Navy Header) -->
+    <header class="bg-gradient-to-r from-brand-900 via-brand-800 to-brand-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20 shadow-inner">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold tracking-tight flex items-center gap-2">
+                        ปฏิทินโรงเรียน มอ.วิทยานุสรณ์
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-white/20 text-white font-semibold border border-white/30">ปีการศึกษา 2569</span>
+                    </h1>
+                    <p class="text-xs text-brand-100">ระบบสืบค้นและแสดงผลปฏิทินกิจกรรมสำหรับนักเรียนและผู้ปกครอง</p>
+                </div>
+            </div>
+
+            <!-- Global Quick Stats -->
+            <div class="flex items-center space-x-2 text-xs">
+                <div class="px-3 py-1.5 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white">
+                    <span class="text-brand-100">กิจกรรมรวม:</span> <strong id="totalEventsCount" class="text-white font-bold">0</strong> รายการ
+                </div>
+                <div class="px-3 py-1.5 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white">
+                    <span class="text-brand-100">วันหยุด:</span> <strong id="holidayCount" class="text-rose-200 font-bold">0</strong> วัน
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Application Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+
+        <!-- Controls Toolbar -->
+        <div class="light-card p-4 rounded-2xl mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            
+            <!-- Month Switcher & Selector -->
+            <div class="flex items-center space-x-2 w-full md:w-auto justify-between md:justify-start">
+                <button id="prevMonthBtn" class="p-2.5 rounded-xl bg-slate-100 text-slate-600 hover:bg-brand-50 hover:text-brand-700 transition border border-slate-200">
+                    <i class="fa-solid fa-chevron-left text-sm"></i>
+                </button>
+                
+                <div class="relative flex-1 md:w-64">
+                    <select id="monthSelect" class="w-full appearance-none bg-slate-50 text-slate-800 text-sm font-semibold px-4 py-2.5 pr-10 rounded-xl border border-slate-300 focus:outline-none focus:border-brand-600 cursor-pointer">
+                        <!-- Options generated via JS -->
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-3.5 top-3.5 text-xs text-slate-400 pointer-events-none"></i>
+                </div>
+
+                <button id="nextMonthBtn" class="p-2.5 rounded-xl bg-slate-100 text-slate-600 hover:bg-brand-50 hover:text-brand-700 transition border border-slate-200">
+                    <i class="fa-solid fa-chevron-right text-sm"></i>
+                </button>
+
+                <button id="todayBtn" class="px-3.5 py-2.5 text-xs font-semibold rounded-xl bg-brand-50 text-brand-700 border border-brand-200 hover:bg-brand-600 hover:text-white transition">
+                    เริ่มต้นปฏิทิน
+                </button>
+            </div>
+
+            <!-- Search & Filters -->
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+                <div class="relative w-full sm:w-64">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-xs text-slate-400"></i>
+                    <input type="text" id="searchInput" placeholder="ค้นหากิจกรรมหรือข้อความ..." class="w-full bg-slate-50 text-sm text-slate-800 pl-9 pr-4 py-2 rounded-xl border border-slate-300 focus:outline-none focus:border-brand-600 placeholder-slate-400">
+                </div>
+
+                <div class="relative w-full sm:w-48">
+                    <select id="categoryFilter" class="w-full appearance-none bg-slate-50 text-slate-700 text-xs font-semibold px-3 py-2.5 pr-8 rounded-xl border border-slate-300 focus:outline-none focus:border-brand-600 cursor-pointer">
+                        <option value="ALL">ทุกหมวดหมู่กิจกรรม</option>
+                        <option value="วันหยุด">วันหยุด</option>
+                        <option value="การสอบ">การสอบ</option>
+                        <option value="กิจกรรมโรงเรียน">กิจกรรมโรงเรียน</option>
+                        <option value="วิชาการ/ค่าย">วิชาการ/ค่าย</option>
+                        <option value="ประชุมผู้ปกครอง">ประชุมผู้ปกครอง</option>
+                        <option value="กิจกรรมนักเรียน">กิจกรรมนักเรียน</option>
+                        <option value="เปิด/ปิดเทอม">เปิด/ปิดเทอม</option>
+                    </select>
+                    <i class="fa-solid fa-filter absolute right-3 top-3 text-xs text-slate-400 pointer-events-none"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Layout Grid: Calendar on Left, Timeline Details on Right -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <!-- Left: Mobile-Friendly Calendar Grid Card (7 Cols) -->
+            <div class="lg:col-span-7 light-card p-5 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <!-- Calendar Card Title Header -->
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
+                        <h2 id="currentMonthDisplay" class="text-base font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-regular fa-calendar-days text-brand-600"></i>
+                            <span id="monthYearTitle">พฤษภาคม 2569</span>
+                        </h2>
+                        <span id="monthEventBadge" class="text-xs px-2.5 py-1 rounded-full bg-brand-50 text-brand-700 font-medium border border-brand-200">0 กิจกรรม</span>
+                    </div>
+
+                    <!-- Days of Week Headers -->
+                    <div class="grid grid-cols-7 text-center text-xs font-bold text-slate-500 mb-2">
+                        <span class="text-rose-500 py-1">อา</span>
+                        <span class="py-1">จ</span>
+                        <span class="py-1">อ</span>
+                        <span class="py-1">พ</span>
+                        <span class="py-1">พฤ</span>
+                        <span class="py-1">ศ</span>
+                        <span class="text-brand-600 py-1">ส</span>
+                    </div>
+
+                    <!-- Dynamic Calendar Day Grid -->
+                    <div id="calendarGrid" class="grid grid-cols-7 gap-1.5 text-sm">
+                        <!-- Rendered dynamically by Javascript -->
+                    </div>
+                </div>
+
+                <!-- Legend Indicator Footer -->
+                <div class="mt-6 pt-4 border-t border-slate-100 flex flex-wrap gap-3 text-[11px] text-slate-600 justify-center">
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full dot-holiday"></span> วันหยุด</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full dot-exam"></span> การสอบ</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full dot-school"></span> กิจกรรมโรงเรียน</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full dot-camp"></span> วิชาการ/ค่าย</span>
+                    <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full dot-parent"></span> ประชุมผู้ปกครอง</span>
+                </div>
+            </div>
+
+            <!-- Right: Event Timeline & Details Sidebar -->
+            <div class="lg:col-span-5 light-card p-5 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <!-- Sidebar Title Header -->
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-brand-600"></i>
+                                รายละเอียดกิจกรรม
+                            </h3>
+                            <p id="selectedDateSubtitle" class="text-xs text-slate-500 mt-0.5">กิจกรรมทั้งหมดประจำเดือนนี้</p>
+                        </div>
+                        <button id="resetDateFilterBtn" class="hidden text-xs text-brand-600 hover:text-brand-800 font-semibold underline">
+                            ดูทั้งเดือน
+                        </button>
+                    </div>
+
+                    <!-- Event Timeline List Container -->
+                    <div id="eventListContainer" class="space-y-3 max-h-[520px] overflow-y-auto pr-1">
+                        <!-- Rendered dynamically by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
+                    ข้อมูลจากปฏิทินโรงเรียน มอ.วิทยานุสรณ์ (อัพเดท ปีการศึกษา 2569)
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Full Dataset loaded directly from Spreadsheet Context
+        const calendarEvents = [
+            // พฤษภาคม 2569
+            { date: "18 พ.ค. 69", day: 18, monthIdx: 0, monthName: "พฤษภาคม 2569", event: "เปิดเรียนภาคเรียนที่ 1 ประจำปีการศึกษา 2569", category: "เปิด/ปิดเทอม" },
+            { date: "19 พ.ค. 69", day: 19, monthIdx: 0, monthName: "พฤษภาคม 2569", event: "ชี้แจงการเข้าร่วมกิจกรรมชุมนุม (ม.1 - ม.6)", category: "กิจกรรมนักเรียน" },
+            { date: "23 พ.ค. 69", day: 23, monthIdx: 0, monthName: "พฤษภาคม 2569", event: "กิจกรรมแสดงคอนเสิร์ต PSU Wit Orchestra ครั้งที่ 6 “เพลงแห่งแผ่นดิน พลังแห่ง มอ.ว.”", category: "กิจกรรมโรงเรียน" },
+            { date: "25 พ.ค. 69", day: 25, monthIdx: 0, monthName: "พฤษภาคม 2569", event: "ทดสอบสมรรถภาพทางกาย ม.1 และ ม.5 (สนามฟุตซอล ม.อ.)", category: "กิจกรรมนักเรียน" },
+            { date: "26 พ.ค. 69", day: 26, monthIdx: 0, monthName: "พฤษภาคม 2569", event: "ทดสอบสมรรถภาพทางกาย ม.2 และ ม.4 (สนามฟุตซอล ม.อ.)", category: "กิจกรรมนักเรียน" },
+            { date: "26 พ.ค. 69", day: 26, monthIdx: 0, monthName: "พฤษภาคม 2569", event: "ยื่นแบบการขอจัดตั้งชุมนุม (ม.3, ม.5, ม.6)", category: "กิจกรรมนักเรียน" },
+            { date: "26 พ.ค. 69", day: 26, monthIdx: 0, monthName: "พฤษภาคม 2569", event: "กิจกรรม Science-Math and Technology day camp 2026", category: "วิชาการ/ค่าย" },
+            { date: "27 พ.ค. 69", day: 27, monthIdx: 0, monthName: "พฤษภาคม 2569", event: "ทดสอบสมรรถภาพทางกาย ม.3 และ ม.6 (สนามฟุตซอล ม.อ.)", category: "กิจกรรมนักเรียน" },
+            { date: "28 พ.ค. 69", day: 28, monthIdx: 0, monthName: "พฤษภาคม 2569", event: "วันหยุดพิเศษ วันอีฎิ้ลอัดฮา ฮิจเราะห์ศักราช 1447", category: "วันหยุด" },
+            { date: "29 พ.ค. 69", day: 29, monthIdx: 0, monthName: "พฤษภาคม 2569", event: "กิจกรรมเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดาฯ พระบรมราชินี", category: "กิจกรรมโรงเรียน" },
+            { date: "30 พ.ค. 69", day: 30, monthIdx: 0, monthName: "พฤษภาคม 2569", event: "ประชุมผู้ปกครอง ครั้งที่ 1/2569 (รูปแบบ on site ที่โรงเรียน)", category: "ประชุมผู้ปกครอง" },
+
+            // มิถุนายน 2569
+            { date: "1 มิ.ย. 69", day: 1, monthIdx: 1, monthName: "มิถุนายน 2569", event: "หยุดชดเชยวันวิสาขบูชา", category: "วันหยุด" },
+            { date: "2 มิ.ย. 69", day: 2, monthIdx: 1, monthName: "มิถุนายน 2569", event: "หยุดเรียน (เรียนชดเชยวันที่ 5 ก.ค. 69 กิจกรรม PSUWIT Competition)", category: "วันหยุด" },
+            { date: "3 มิ.ย. 69", day: 3, monthIdx: 1, monthName: "มิถุนายน 2569", event: "วันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดาฯ พระบรมราชินี", category: "วันหยุด" },
+            { date: "4 มิ.ย. 69", day: 4, monthIdx: 1, monthName: "มิถุนายน 2569", event: "โครงการมหกรรมการแข่งขันภายใน ครั้งที่ 3 PSUWIT Competition ปีการศึกษา 2569 (เริ่มการแข่งขัน)", category: "กิจกรรมโรงเรียน" },
+            { date: "5 มิ.ย. 69", day: 5, monthIdx: 1, monthName: "มิถุนายน 2569", event: "ฉีดวัคซีนป้องกันโรคไข้หวัดใหญ่", category: "กิจกรรมโรงเรียน" },
+            { date: "9 มิ.ย. 69", day: 9, monthIdx: 1, monthName: "มิถุนายน 2569", event: "นำเสนอการจัดตั้งชุมนุม", category: "กิจกรรมนักเรียน" },
+            { date: "11 มิ.ย. 69", day: 11, monthIdx: 1, monthName: "มิถุนายน 2569", event: "กิจกรรมไหว้ครู", category: "กิจกรรมโรงเรียน" },
+            { date: "16 มิ.ย. 69", day: 16, monthIdx: 1, monthName: "มิถุนายน 2569", event: "ประกาศผลการจัดตั้งชุมนุม ปีการศึกษา 2569", category: "กิจกรรมนักเรียน" },
+            { date: "23 มิ.ย. 69", day: 23, monthIdx: 1, monthName: "มิถุนายน 2569", event: "นักเรียนลงทะเบียนเลือกชุมนุม", category: "กิจกรรมนักเรียน" },
+            { date: "25 มิ.ย. 69", day: 25, monthIdx: 1, monthName: "มิถุนายน 2569", event: "กิจกรรมเลือกตั้งคณะกรรมการนักเรียน", category: "กิจกรรมนักเรียน" },
+            { date: "26-27 มิ.ย. 69", day: 26, monthIdx: 1, monthName: "มิถุนายน 2569", event: "กิจกรรมการฝึกอบรมนายหมู่ลูกเสือ", category: "วิชาการ/ค่าย" },
+
+            // กรกฎาคม 2569
+            { date: "1 ก.ค. 69", day: 1, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "วันสถาปนาคณะลูกเสือแห่งชาติ", category: "กิจกรรมโรงเรียน" },
+            { date: "5 ก.ค. 69", day: 5, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "โครงการมหกรรมการแข่งขัน ครั้งที่ 3 PSUWIT Competition ปีการศึกษา 2569", category: "กิจกรรมโรงเรียน" },
+            { date: "6 – 10 ก.ค. 69", day: 6, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "กิจกรรมเสริมทักษะ loop 1 ภาคเรียนที่ 1/2569 ช่วงที่ 1", category: "วิชาการ/ค่าย" },
+            { date: "13 - 16 ก.ค. 69", day: 13, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "โครงการสัปดาห์ส่งเสริมประเพณีและวัฒนธรรมไทย", category: "กิจกรรมโรงเรียน" },
+            { date: "17 ก.ค. 69", day: 17, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "กิจกรรมหล่อเทียน/ถวายเทียนจำนำพรรษา และกิจกรรมภาษาและวัฒนธรรมไทย", category: "กิจกรรมโรงเรียน" },
+            { date: "18 ก.ค. 69", day: 18, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "ประชุมผู้ปกครอง ครั้งที่ 2/2569 รายงานคะแนน 30% (รูปแบบ online)", category: "ประชุมผู้ปกครอง" },
+            { date: "6-31 ก.ค. 69", day: 20, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "ซ่อมเสริมนักเรียนที่มีผล 0, ร และ มผ. (สอบแก้ตัวช่วงที่ 1) / ติดตามงานค้าง 1/2569", category: "การสอบ" },
+            { date: "20 ก.ค.-5 ส.ค. 69", day: 21, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "กิจกรรมเสริมทักษะ loop 1 ภาคเรียนที่ 1/2569 ช่วงที่ 2", category: "วิชาการ/ค่าย" },
+            { date: "24 ก.ค. 69", day: 24, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "กิจกรรมวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระเจ้าอยู่หัว", category: "กิจกรรมโรงเรียน" },
+            { date: "24 - 25 ก.ค. 69", day: 24, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "กิจกรรมอบรมผู้นำคณะกรรมการนักเรียน", category: "กิจกรรมนักเรียน" },
+            { date: "28 ก.ค. 69", day: 28, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "หยุดเรียนวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระเจ้าอยู่หัว", category: "วันหยุด" },
+            { date: "29 ก.ค. 69", day: 29, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "หยุดเรียนวันอาสาฬหบูชา", category: "วันหยุด" },
+            { date: "30 ก.ค. 69", day: 30, monthIdx: 2, monthName: "กรกฎาคม 2569", event: "หยุดเรียนวันเข้าพรรษา", category: "วันหยุด" },
+
+            // สิงหาคม 2569
+            { date: "6 ส.ค. 69", day: 6, monthIdx: 3, monthName: "สิงหาคม 2569", event: "กิจกรรมวันวิทยาศาสตร์(ภายใน) และ โครงการต้นกล้านวัตกรรมฯ", category: "วิชาการ/ค่าย" },
+            { date: "7 ส.ค. 69", day: 7, monthIdx: 3, monthName: "สิงหาคม 2569", event: "กิจกรรมเรียนรู้วิทยาศาสตร์นอกห้องเรียน (โครงการสัปดาห์วิทยาศาสตร์)", category: "วิชาการ/ค่าย" },
+            { date: "10 - 24 ส.ค. 69", day: 10, monthIdx: 3, monthName: "สิงหาคม 2569", event: "กิจกรรมเสริมทักษะ loop 2 ภาคเรียนที่ 1/2569", category: "วิชาการ/ค่าย" },
+            { date: "11 ส.ค. 69", day: 11, monthIdx: 3, monthName: "สิงหาคม 2569", event: "กิจกรรมวันแม่แห่งชาติ", category: "กิจกรรมโรงเรียน" },
+            { date: "12 ส.ค. 69", day: 12, monthIdx: 3, monthName: "สิงหาคม 2569", event: "วันหยุดเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง", category: "วันหยุด" },
+            { date: "15 ส.ค. 69", day: 15, monthIdx: 3, monthName: "สิงหาคม 2569", event: "ประชุมสามัญประจำปีสมาคมเครือข่ายผู้ปกครอง และประชุมผู้ปกครอง ครั้งที่ 3/2569", category: "ประชุมผู้ปกครอง" },
+            { date: "24 ส.ค.–26 ก.ย. 69", day: 24, monthIdx: 3, monthName: "สิงหาคม 2569", event: "ซ่อมเสริมนักเรียนที่มีผล 0, ร และ มผ. (สอบแก้ตัวช่วงที่ 2) / ติดตามงานค้าง 1/2569", category: "การสอบ" },
+            { date: "26 - 28 ส.ค. 69", day: 26, monthIdx: 3, monthName: "สิงหาคม 2569", event: "กิจกรรมการเดินทางไกลและอยู่ค่ายพักแรมลูกเสือ ม.3 ณ ค่ายลูกเสือสวนสาธารณะหาดใหญ่", category: "วิชาการ/ค่าย" },
+
+            // กันยายน 2569
+            { date: "9 ก.ย. 69", day: 9, monthIdx: 4, monthName: "กันยายน 2569", event: "การแข่งขันโครงงานระดับนานาชาติ International STEM Project Fair 2026 (ISTEM 2026) รอบ Grand Final", category: "วิชาการ/ค่าย" },
+            { date: "24 ก.ย. 69", day: 24, monthIdx: 4, monthName: "กันยายน 2569", event: "กิจกรรมวางพวงมาลาเนื่องในวันมหิดล", category: "กิจกรรมโรงเรียน" },
+            { date: "28 ก.ย.- 2 ต.ค. 69", day: 28, monthIdx: 4, monthName: "กันยายน 2569", event: "สอบปลายภาคเรียน 1/2569", category: "การสอบ" },
+
+            // ตุลาคม 2569
+            { date: "19 ต.ค. 69", day: 19, monthIdx: 5, monthName: "ตุลาคม 2569", event: "เปิดเรียนภาคเรียนที่ 2/2569", category: "เปิด/ปิดเทอม" },
+            { date: "23 ต.ค. 69", day: 23, monthIdx: 5, monthName: "ตุลาคม 2569", event: "วันปิยมหาราช", category: "วันหยุด" },
+            { date: "31 ต.ค. 69", day: 31, monthIdx: 5, monthName: "ตุลาคม 2569", event: "ประชุมผู้ปกครอง ครั้งที่ 4/2569 พบครูที่ปรึกษารับสมุดรายงานผลการเรียน (Onsite)", category: "ประชุมผู้ปกครอง" },
+
+            // พฤศจิกายน 2569
+            { date: "2 พ.ย. 69", day: 2, monthIdx: 6, monthName: "พฤศจิกายน 2569", event: "ประกาศผลโควตานักเรียน ม.4 ปีการศึกษา 2570", category: "กิจกรรมนักเรียน" },
+            { date: "2 – 27 พ.ย. 69", day: 2, monthIdx: 6, monthName: "พฤศจิกายน 2569", event: "ซ่อมเสริมนักเรียนที่มีผล 0, ร และ มผ. (สอบแก้ตัวช่วงที่ 1) / ติดตามงานค้าง 2/2569", category: "การสอบ" },
+            { date: "2 - 20 พ.ย. 69", day: 2, monthIdx: 6, monthName: "พฤศจิกายน 2569", event: "กิจกรรมเสริมทักษะ loop 1 ภาคเรียนที่ 2/2569", category: "วิชาการ/ค่าย" },
+            { date: "7 พ.ย. 69", day: 7, monthIdx: 6, monthName: "พฤศจิกายน 2569", event: "โครงการ The 13th PSU.WIT MATH CAMP", category: "วิชาการ/ค่าย" },
+            { date: "24 พ.ย. 69", day: 24, monthIdx: 6, monthName: "พฤศจิกายน 2569", event: "กิจกรรมสืบสานประเพณีลอยกระทง", category: "กิจกรรมโรงเรียน" },
+            { date: "25 พ.ย. 69", day: 25, monthIdx: 6, monthName: "พฤศจิกายน 2569", event: "กิจกรรมวันสมเด็จพระมหาธีรราชเจ้า (ลูกเสือ/เนตรนารี ทุกระดับชั้น)", category: "กิจกรรมโรงเรียน" },
+            { date: "30 พ.ย. - 18 ธ.ค. 69", day: 30, monthIdx: 6, monthName: "พฤศจิกายน 2569", event: "กิจกรรมเสริมทักษะ loop 2 ภาคเรียนที่ 2/2569", category: "วิชาการ/ค่าย" },
+
+            // ธันวาคม 2569
+            { date: "4 ธ.ค. 69", day: 4, monthIdx: 7, monthName: "ธันวาคม 2569", event: "กิจกรรมสดุดีสถาบันกษัตริย์ไทย", category: "กิจกรรมโรงเรียน" },
+            { date: "7 ธ.ค. 69", day: 7, monthIdx: 7, monthName: "ธันวาคม 2569", event: "หยุดชดเชยวันคล้ายวันพระราชสมภพ ร.9 วันชาติ และวันพ่อแห่งชาติ", category: "วันหยุด" },
+            { date: "10 ธ.ค. 69", day: 10, monthIdx: 7, monthName: "ธันวาคม 2569", event: "หยุดเรียนวันรัฐธรรมนูญ", category: "วันหยุด" },
+            { date: "12 - 13 ธ.ค. 69", day: 12, monthIdx: 7, monthName: "ธันวาคม 2569", event: "สอบคัดเลือกนักเรียนปีการศึกษา 2570", category: "การสอบ" },
+            { date: "19 ธ.ค. 69", day: 19, monthIdx: 7, monthName: "ธันวาคม 2569", event: "ประชุมผู้ปกครอง ครั้งที่ 5/2569 รายงานคะแนน 30% (รูปแบบ online)", category: "ประชุมผู้ปกครอง" },
+            { date: "21 ธ.ค. 69 – 8 ม.ค. 70", day: 21, monthIdx: 7, monthName: "ธันวาคม 2569", event: "ซ่อมเสริมนักเรียนที่มีผล 0, ร และ มผ. (สอบแก้ตัวช่วงที่ 2) / ติดตามงานค้าง 2/2569", category: "การสอบ" },
+            { date: "29 ธ.ค. 69", day: 29, monthIdx: 7, monthName: "ธันวาคม 2569", event: "กิจกรรมวันปีใหม่", category: "กิจกรรมโรงเรียน" },
+            { date: "30 ธ.ค. 69 - 3 ม.ค. 70", day: 30, monthIdx: 7, monthName: "ธันวาคม 2569", event: "หยุดเทศกาลปีใหม่", category: "วันหยุด" },
+
+            // มกราคม 2570
+            { date: "4 ม.ค. 70", day: 4, monthIdx: 8, monthName: "มกราคม 2570", event: "เปิดเรียนหลังหยุดเรียนวันปีใหม่", category: "เปิด/ปิดเทอม" },
+            { date: "9 ม.ค. 70", day: 9, monthIdx: 8, monthName: "มกราคม 2570", event: "กิจกรรมวันเด็ก", category: "กิจกรรมโรงเรียน" },
+            { date: "13 - 15 ม.ค. 70", day: 13, monthIdx: 8, monthName: "มกราคม 2570", event: "กิจกรรมการเดินทางไกลและอยู่ค่ายพักแรมลูกเสือ ม.2 ณ ค่ายรัตรสาร", category: "วิชาการ/ค่าย" },
+            { date: "23 ม.ค. 70", day: 23, monthIdx: 8, monthName: "มกราคม 2570", event: "โครงการเปิดโลกสมรรถนะหลักแห่ง มอ.ว. ครั้งที่ 4 และแสดงผลงานชุมนุม", category: "กิจกรรมโรงเรียน" },
+            { date: "26 ม.ค. 70", day: 26, monthIdx: 8, monthName: "มกราคม 2570", event: "กิจกรรมวันสถาปนาโรงเรียน", category: "กิจกรรมโรงเรียน" },
+            { date: "30 ม.ค. 70", day: 30, monthIdx: 8, monthName: "มกราคม 2570", event: "ประชุมผู้ปกครอง ครั้งที่ 6/2569 แจ้งคะแนน 60% (รูปแบบ online)", category: "ประชุมผู้ปกครอง" },
+            { date: "31 ม.ค. 70", day: 31, monthIdx: 8, monthName: "มกราคม 2570", event: "กิจกรรม PSUWit mini marathon ครั้งที่ 8", category: "กิจกรรมโรงเรียน" },
+
+            // กุมภาพันธ์ 2570
+            { date: "1-5 ก.พ. 70", day: 1, monthIdx: 9, monthName: "กุมภาพันธ์ 2570", event: "ซ่อมเสริมนักเรียนที่มีผล 0, ร และ มผ. (สอบแก้ตัวช่วงที่ 3) / ติดตามงานค้าง 2/2569", category: "การสอบ" },
+            { date: "10 - 12 ก.พ. 70", day: 10, monthIdx: 9, monthName: "กุมภาพันธ์ 2570", event: "กิจกรรมการเดินทางไกลและอยู่ค่ายพักแรมลูกเสือ ม.1", category: "วิชาการ/ค่าย" },
+            { date: "14 ก.พ. 70", day: 14, monthIdx: 9, monthName: "กุมภาพันธ์ 2570", event: "กิจกรรมเวทีวิชาการ มอ.ว. ครั้งที่ 3 \"มอ.ว.ร่วมสร้างครู นักวิจัย\"", category: "วิชาการ/ค่าย" },
+            { date: "15 - 17 ก.พ. 70", day: 15, monthIdx: 9, monthName: "กุมภาพันธ์ 2570", event: "สอบปลายภาคเรียน 2/2569 ม.3 และ ม.6", category: "การสอบ" },
+            { date: "17 ก.พ. 70", day: 17, monthIdx: 9, monthName: "กุมภาพันธ์ 2570", event: "กิจกรรมปัจฉิมนักเรียนชั้น ม.3 และ ม.6", category: "กิจกรรมนักเรียน" },
+            { date: "22 - 26 ก.พ. 70", day: 22, monthIdx: 9, monthName: "กุมภาพันธ์ 2570", event: "ซ่อมเสริมนักเรียนที่มีผล 0, ร และ มผ. (สอบแก้ตัวช่วงที่ 4) / ติดตามงานค้าง 2/2569", category: "การสอบ" },
+            { date: "22 ก.พ. 70", day: 22, monthIdx: 9, monthName: "กุมภาพันธ์ 2570", event: "หยุดเรียนวันมาฆบูชา", category: "วันหยุด" },
+
+            // มีนาคม 2570
+            { date: "1 - 5 มี.ค. 70", day: 1, monthIdx: 10, monthName: "มีนาคม 2570", event: "สอบปลายภาคเรียน 2/2569 ม.1, ม.2, ม.4 และ ม.5", category: "การสอบ" },
+            { date: "8 - 12 มี.ค. 70", day: 8, monthIdx: 10, monthName: "มีนาคม 2570", event: "สอบแก้ตัวและแก้ไขผลการเรียน (0, ร, มส, มผ.) ของนักเรียน ม.1, ม.2, ม.4 และ ม.5", category: "การสอบ" },
+            { date: "13 มี.ค. 70", day: 13, monthIdx: 10, monthName: "มีนาคม 2570", event: "มอบตัวและปฐมนิเทศ ม.1, ม.4 ปีการศึกษา 2570", category: "กิจกรรมนักเรียน" },
+            { date: "31 มี.ค. 70", day: 31, monthIdx: 10, monthName: "มีนาคม 2570", event: "พิธีรับประกาศนียบัตรผู้สำเร็จการศึกษาประจำปีการศึกษา 2569", category: "กิจกรรมโรงเรียน" },
+            { date: "31 มี.ค. 70", day: 31, monthIdx: 10, monthName: "มีนาคม 2570", event: "กิจกรรม PSUWit Bye Night 2027", category: "กิจกรรมโรงเรียน" },
+
+            // เมษายน 2570
+            { date: "5 - 9 เม.ย. 70", day: 5, monthIdx: 11, monthName: "เมษายน 2570", event: "เรียนปรับพื้นฐานภาคฤดูร้อน ช่วงที่ 1", category: "วิชาการ/ค่าย" },
+            { date: "9 เม.ย. 70", day: 9, monthIdx: 11, monthName: "เมษายน 2570", event: "กิจกรรมรดน้ำสรงน้ำพระประเพณีสงกรานต์", category: "กิจกรรมโรงเรียน" },
+            { date: "10 - 18 เม.ย. 70", day: 10, monthIdx: 11, monthName: "เมษายน 2570", event: "หยุดเรียนวันสงกรานต์", category: "วันหยุด" },
+            { date: "26 เม.ย. - 9 พ.ค. 70", day: 26, monthIdx: 11, monthName: "เมษายน 2570", event: "เรียนปรับพื้นฐานภาคฤดูร้อน ช่วงที่ 2-3", category: "วิชาการ/ค่าย" }
+        ];
+
+        // Month Metadata Configuration (May 2026 - April 2027)
+        const monthsConfig = [
+            { name: "พฤษภาคม 2569", days: 31, startOffset: 5 }, // 1 May 2026 = Friday (Offset 5)
+            { name: "มิถุนายน 2569", days: 30, startOffset: 1 },  // 1 Jun 2026 = Monday
+            { name: "กรกฎาคม 2569", days: 31, startOffset: 3 }, // 1 Jul 2026 = Wednesday
+            { name: "สิงหาคม 2569", days: 31, startOffset: 6 },  // 1 Aug 2026 = Saturday
+            { name: "กันยายน 2569", days: 30, startOffset: 2 },  // 1 Sep 2026 = Tuesday
+            { name: "ตุลาคม 2569", days: 31, startOffset: 4 },   // 1 Oct 2026 = Thursday
+            { name: "พฤศจิกายน 2569", days: 30, startOffset: 0 },// 1 Nov 2026 = Sunday
+            { name: "ธันวาคม 2569", days: 31, startOffset: 2 },  // 1 Dec 2026 = Tuesday
+            { name: "มกราคม 2570", days: 31, startOffset: 5 },   // 1 Jan 2027 = Friday
+            { name: "กุมภาพันธ์ 2570", days: 28, startOffset: 1 },// 1 Feb 2027 = Monday
+            { name: "มีนาคม 2570", days: 31, startOffset: 1 },   // 1 Mar 2027 = Monday
+            { name: "เมษายน 2570", days: 30, startOffset: 4 }    // 1 Apr 2027 = Thursday
+        ];
+
+        let currentMonthIdx = 0; // Default May 2026
+        let selectedDayNumber = null;
+        let activeCategoryFilter = "ALL";
+        let searchQuery = "";
+
+        // Elements
+        const monthSelect = document.getElementById("monthSelect");
+        const monthYearTitle = document.getElementById("monthYearTitle");
+        const monthEventBadge = document.getElementById("monthEventBadge");
+        const calendarGrid = document.getElementById("calendarGrid");
+        const eventListContainer = document.getElementById("eventListContainer");
+        const selectedDateSubtitle = document.getElementById("selectedDateSubtitle");
+        const resetDateFilterBtn = document.getElementById("resetDateFilterBtn");
+        const searchInput = document.getElementById("searchInput");
+        const categoryFilter = document.getElementById("categoryFilter");
+
+        // Initialize App
+        function initApp() {
+            populateMonthDropdown();
+            updateGlobalStats();
+            renderCalendar();
+
+            // Event Listeners
+            document.getElementById("prevMonthBtn").addEventListener("click", () => changeMonth(-1));
+            document.getElementById("nextMonthBtn").addEventListener("click", () => changeMonth(1));
+            document.getElementById("todayBtn").addEventListener("click", () => {
+                currentMonthIdx = 0;
+                selectedDayNumber = null;
+                monthSelect.value = 0;
+                renderCalendar();
+            });
+
+            monthSelect.addEventListener("change", (e) => {
+                currentMonthIdx = parseInt(e.target.value);
+                selectedDayNumber = null;
+                renderCalendar();
+            });
+
+            categoryFilter.addEventListener("change", (e) => {
+                activeCategoryFilter = e.target.value;
+                renderCalendar();
+            });
+
+            searchInput.addEventListener("input", (e) => {
+                searchQuery = e.target.value.trim().toLowerCase();
+                renderCalendar();
+            });
+
+            resetDateFilterBtn.addEventListener("click", () => {
+                selectedDayNumber = null;
+                renderCalendar();
+            });
+        }
+
+        function populateMonthDropdown() {
+            monthsConfig.forEach((m, idx) => {
+                const opt = document.createElement("option");
+                opt.value = idx;
+                opt.textContent = m.name;
+                monthSelect.appendChild(opt);
+            });
+            monthSelect.value = currentMonthIdx;
+        }
+
+        function updateGlobalStats() {
+            document.getElementById("totalEventsCount").textContent = calendarEvents.length;
+            const holidays = calendarEvents.filter(e => e.category === "วันหยุด").length;
+            document.getElementById("holidayCount").textContent = holidays;
+        }
+
+        function changeMonth(delta) {
+            currentMonthIdx = (currentMonthIdx + delta + monthsConfig.length) % monthsConfig.length;
+            monthSelect.value = currentMonthIdx;
+            selectedDayNumber = null;
+            renderCalendar();
+        }
+
+        function getCategoryDotClass(cat) {
+            switch(cat) {
+                case 'วันหยุด': return 'dot-holiday';
+                case 'การสอบ': return 'dot-exam';
+                case 'กิจกรรมโรงเรียน': return 'dot-school';
+                case 'วิชาการ/ค่าย': return 'dot-camp';
+                case 'ประชุมผู้ปกครอง': return 'dot-parent';
+                case 'กิจกรรมนักเรียน': return 'dot-student';
+                default: return 'dot-term';
+            }
+        }
+
+        function getCategoryBadgeClass(cat) {
+            switch(cat) {
+                case 'วันหยุด': return 'cat-holiday';
+                case 'การสอบ': return 'cat-exam';
+                case 'กิจกรรมโรงเรียน': return 'cat-school';
+                case 'วิชาการ/ค่าย': return 'cat-camp';
+                case 'ประชุมผู้ปกครอง': return 'cat-parent';
+                case 'กิจกรรมนักเรียน': return 'cat-student';
+                default: return 'cat-term';
+            }
+        }
+
+        function renderCalendar() {
+            const mConfig = monthsConfig[currentMonthIdx];
+            monthYearTitle.textContent = mConfig.name;
+
+            // Get events for current month
+            let monthEvents = calendarEvents.filter(e => e.monthIdx === currentMonthIdx);
+
+            // Apply global category filter & search filter
+            if (activeCategoryFilter !== "ALL") {
+                monthEvents = monthEvents.filter(e => e.category === activeCategoryFilter);
+            }
+
+            if (searchQuery) {
+                monthEvents = monthEvents.filter(e => e.event.toLowerCase().includes(searchQuery) || e.date.toLowerCase().includes(searchQuery));
+            }
+
+            monthEventBadge.textContent = `${monthEvents.length} กิจกรรม`;
+
+            // Clear Grid
+            calendarGrid.innerHTML = "";
+
+            // Render Empty Slots for offset
+            for (let i = 0; i < mConfig.startOffset; i++) {
+                const emptyCell = document.createElement("div");
+                emptyCell.className = "day-cell rounded-xl bg-slate-50 opacity-40 border border-slate-100";
+                calendarGrid.appendChild(emptyCell);
+            }
+
+            // Render Day Cells
+            for (let d = 1; d <= mConfig.days; d++) {
+                const dayCell = document.createElement("div");
+                const dayEvents = monthEvents.filter(e => e.day === d);
+                const isSelected = (selectedDayNumber === d);
+
+                dayCell.className = `day-cell p-2 rounded-xl flex flex-col justify-between cursor-pointer ${isSelected ? 'selected' : ''}`;
+
+                // Date Number Top Row
+                const topRow = document.createElement("div");
+                topRow.className = "flex justify-between items-center";
+                
+                const numSpan = document.createElement("span");
+                numSpan.className = `text-xs font-semibold ${isSelected ? 'text-brand-600 font-bold' : 'text-slate-700'}`;
+                numSpan.textContent = d;
+                topRow.appendChild(numSpan);
+
+                if (dayEvents.length > 0) {
+                    const countBadge = document.createElement("span");
+                    countBadge.className = "text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-brand-50 text-brand-700 border border-brand-200";
+                    countBadge.textContent = dayEvents.length;
+                    topRow.appendChild(countBadge);
+                }
+
+                dayCell.appendChild(topRow);
+
+                // Dots indicator container
+                const dotsDiv = document.createElement("div");
+                dotsDiv.className = "flex flex-wrap gap-1 mt-1";
+
+                dayEvents.slice(0, 3).forEach(ev => {
+                    const dot = document.createElement("span");
+                    dot.className = `event-dot ${getCategoryDotClass(ev.category)}`;
+                    dotsDiv.appendChild(dot);
+                });
+
+                if (dayEvents.length > 3) {
+                    const plusSpan = document.createElement("span");
+                    plusSpan.className = "text-[9px] text-slate-400 font-bold leading-none";
+                    plusSpan.textContent = "+";
+                    dotsDiv.appendChild(plusSpan);
+                }
+
+                dayCell.appendChild(dotsDiv);
+
+                // Click event listener
+                dayCell.addEventListener("click", () => {
+                    selectedDayNumber = (selectedDayNumber === d) ? null : d;
+                    renderCalendar();
+                });
+
+                calendarGrid.appendChild(dayCell);
+            }
+
+            // Render Timeline List in Sidebar
+            renderEventList(monthEvents);
+        }
+
+        function renderEventList(monthEvents) {
+            eventListContainer.innerHTML = "";
+
+            let displayEvents = monthEvents;
+
+            if (selectedDayNumber !== null) {
+                displayEvents = monthEvents.filter(e => e.day === selectedDayNumber);
+                selectedDateSubtitle.textContent = `กิจกรรมประจำวันที่ ${selectedDayNumber} ${monthsConfig[currentMonthIdx].name}`;
+                resetDateFilterBtn.classList.remove("hidden");
+            } else {
+                selectedDateSubtitle.textContent = `กิจกรรมทั้งหมดประจำเดือน${monthsConfig[currentMonthIdx].name}`;
+                resetDateFilterBtn.classList.add("hidden");
+            }
+
+            if (displayEvents.length === 0) {
+                eventListContainer.innerHTML = `
+                    <div class="text-center py-10 px-4">
+                        <i class="fa-regular fa-calendar-xmark text-3xl text-slate-300 mb-2"></i>
+                        <p class="text-xs text-slate-400">ไม่พบกิจกรรมในช่วงเวลาหรือเงื่อนไขที่เลือก</p>
+                    </div>
+                `;
+                return;
+            }
+
+            displayEvents.forEach(ev => {
+                const card = document.createElement("div");
+                card.className = "p-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 transition flex flex-col gap-2 shadow-sm";
+
+                const topBar = document.createElement("div");
+                topBar.className = "flex justify-between items-center gap-2";
+
+                const dateTag = document.createElement("span");
+                dateTag.className = "text-xs font-bold text-brand-700 flex items-center gap-1.5";
+                dateTag.innerHTML = `<i class="fa-regular fa-clock text-[10px]"></i> ${ev.date}`;
+
+                const catBadge = document.createElement("span");
+                catBadge.className = `text-[10px] font-semibold px-2 py-0.5 rounded-md ${getCategoryBadgeClass(ev.category)}`;
+                catBadge.textContent = ev.category;
+
+                topBar.appendChild(dateTag);
+                topBar.appendChild(catBadge);
+
+                const titleP = document.createElement("p");
+                titleP.className = "text-xs font-medium text-slate-800 leading-relaxed";
+                titleP.textContent = ev.event;
+
+                card.appendChild(topBar);
+                card.appendChild(titleP);
+
+                eventListContainer.appendChild(card);
+            });
+        }
+
+        // Initialize on load
+        document.addEventListener("DOMContentLoaded", initApp);
+    </script>
+</body>
+</html>
